@@ -1,0 +1,222 @@
+// LEVEL ORDER TRAVERSAL TECHNIQUE
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
+ * right(right) {}
+ * };
+ */
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if (root == NULL)
+            return 0;
+        int count = 0;
+        queue<TreeNode*> q;
+        q.push(root);
+
+        while (!q.empty()) {
+            int sizes = q.size();
+            count++;
+            for (int i = 0; i < sizes; i++) {
+                TreeNode* curr = q.front();
+                q.pop();
+                if (curr->left != NULL)
+                    q.push(curr->left);
+                if (curr->right != NULL)
+                    q.push(curr->right);
+            }
+        }
+        return count;
+    }};
+// explaination
+You want the dry run formatted for a GitHub repository, likely in a Markdown file (e.g., DRY_RUN.md). Here's how you can present it clearly and professionally.
+
+Dry Run: Maximum Depth of Binary Tree (BFS Approach)
+This document provides a step-by-step dry run of the maxDepth function, which calculates the maximum depth of a binary tree using a Breadth-First Search (BFS) approach.
+
+Function Signature
+C++
+
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        // ... implementation ...
+    }
+};
+Example Binary Tree
+We will use the following binary tree for the dry run:
+
+      4
+     / \
+    2   7
+   / \ / \
+  1  3 6  9
+Initial State
+Before the execution of the maxDepth function:
+
+root: Points to Node 4
+
+depth: 0
+
+q (queue): [] (empty)
+
+Step-by-Step Execution
+Step 1: Handle root == NULL Check
+The root node is 4 (not NULL).
+
+The condition if (root == NULL) evaluates to false.
+
+Step 2: Initialize Queue and Depth
+depth remains 0.
+
+q.push(root): Node 4 is pushed into the queue.
+
+Current q: [4]
+
+Step 3: First while loop iteration (Processing Level 1)
+!q.empty(): true (queue contains [4]).
+
+int levelSize = q.size();
+
+levelSize becomes 1. (There is one node at the current level)
+
+depth++;
+
+depth becomes 1. (We are now processing Level 1)
+
+--- Inner for loop: for (int i = 0; i < 1; i++) ---
+
+Iteration i = 0 (Processing Node 4):
+
+TreeNode* curr = q.front();: curr points to Node 4.
+
+q.pop();: Node 4 is removed from the queue.
+
+Current q: []
+
+if (curr->left != NULL): Node 4's left child (Node 2) is not NULL.
+
+q.push(curr->left);: Node 2 is pushed.
+
+Current q: [2]
+
+if (curr->right != NULL): Node 4's right child (Node 7) is not NULL.
+
+q.push(curr->right);: Node 7 is pushed.
+
+Current q: [2, 7]
+
+--- End of inner for loop ---
+
+Step 4: Second while loop iteration (Processing Level 2)
+!q.empty(): true (queue contains [2, 7]).
+
+int levelSize = q.size();
+
+levelSize becomes 2. (There are two nodes at the current level)
+
+depth++;
+
+depth becomes 2. (We are now processing Level 2)
+
+--- Inner for loop: for (int i = 0; i < 2; i++) ---
+
+Iteration i = 0 (Processing Node 2):
+
+TreeNode* curr = q.front();: curr points to Node 2.
+
+q.pop();: Node 2 is removed from the queue.
+
+Current q: [7]
+
+if (curr->left != NULL): Node 2's left child (Node 1) is not NULL.
+
+q.push(curr->left);: Node 1 is pushed.
+
+Current q: [7, 1]
+
+if (curr->right != NULL): Node 2's right child (Node 3) is not NULL.
+
+q.push(curr->right);: Node 3 is pushed.
+
+Current q: [7, 1, 3]
+
+Iteration i = 1 (Processing Node 7):
+
+TreeNode* curr = q.front();: curr points to Node 7.
+
+q.pop();: Node 7 is removed from the queue.
+
+Current q: [1, 3]
+
+if (curr->left != NULL): Node 7's left child (Node 6) is not NULL.
+
+q.push(curr->left);: Node 6 is pushed.
+
+Current q: [1, 3, 6]
+
+if (curr->right != NULL): Node 7's right child (Node 9) is not NULL.
+
+q.push(curr->right);: Node 9 is pushed.
+
+Current q: [1, 3, 6, 9]
+
+--- End of inner for loop ---
+
+Step 5: Third while loop iteration (Processing Level 3)
+!q.empty(): true (queue contains [1, 3, 6, 9]).
+
+int levelSize = q.size();
+
+levelSize becomes 4. (There are four nodes at the current level)
+
+depth++;
+
+depth becomes 3. (We are now processing Level 3)
+
+--- Inner for loop: for (int i = 0; i < 4; i++) ---
+
+Iteration i = 0 (Processing Node 1):
+
+curr points to Node 1. q.pop(). Current q: [3, 6, 9]
+
+Node 1 has no children. Nothing is pushed.
+
+Iteration i = 1 (Processing Node 3):
+
+curr points to Node 3. q.pop(). Current q: [6, 9]
+
+Node 3 has no children. Nothing is pushed.
+
+Iteration i = 2 (Processing Node 6):
+
+curr points to Node 6. q.pop(). Current q: [9]
+
+Node 6 has no children. Nothing is pushed.
+
+Iteration i = 3 (Processing Node 9):
+
+curr points to Node 9. q.pop(). Current q: []
+
+Node 9 has no children. Nothing is pushed.
+
+--- End of inner for loop ---
+
+Step 6: Fourth while loop iteration
+!q.empty(): false (queue is empty).
+
+The while loop terminates.
+
+Step 7: Return depth
+The function returns the final value of depth, which is 3.
+
+
+
+
+};
