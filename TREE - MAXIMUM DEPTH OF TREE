@@ -1,4 +1,4 @@
-// LEVEL ORDER TRAVERSAL TECHNIQUE
+// LEVEL ORDER TRAVERSAL TECHNIQUE ==o(n) -TC
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -216,7 +216,15 @@ The while loop terminates.
 Step 7: Return depth
 The function returns the final value of depth, which is 3.
 
+// APROACH 2 - by using depth calculation
 
-
-
-};
+    int maxDepth(TreeNode* root) {
+        if (root == NULL)
+            return NULL;
+             else return max(1 + maxDepth(root->left),
+                                        1 + maxDepth(root->right));
+    }
+//complexity =0(n)
+sp=o(h)
+wc=o(n)
+bc =o(log n)
